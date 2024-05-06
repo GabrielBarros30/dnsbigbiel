@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Katiau IOS - Keyauth</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #222;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.4);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #666;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .whatsapp-btn {
+            width: calc(100% - 20px); /* Ajuste para compensar o espaçamento */
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            display: block;
+        }
+        .whatsapp-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+    <div class="container">
+        <h1>Insira Sua Key</h1>
+        <form id="loginForm">
+            <input type="text" id="key" name="key" placeholder="Key" required>
+            <button type="button" class="btn" onclick="submitForm()">Login</button>
+            <a href="https://wa.link/j3tev8" target="_blank" class="whatsapp-btn">WhatsApp Para Compras</a>
+        </form>
+    </div>
+
+    <script>
+        // Verifica se está em um dispositivo iOS e no Safari
+        var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+        if (!isIOS || !isSafari) {
+            alert('Este site é Compatível Apenas Com Dispositivos iOS Abra O Site Por Meio De Um iPhone.');
+            window.location.href = 'about:blank'; // Redireciona para uma página em branco
+        }
+
+        // Bloqueia o botão F12 e Ctrl+Shift+I
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.keyCode == 123) {
+                return false;
+            }
+        }
+
+        // Função para verificar se a chave é válida
+        function checkKey(key) {
+            // Aqui você pode adicionar lógica para verificar a chave em um backend ou em outro sistema de autenticação
+            // Por enquanto, vamos simular uma chave válida
+            return key === 'katiau';
+        }
+
+        function submitForm() {
+            var key = document.getElementById('key').value;
+
+            // Verifica se a chave é válida
+            if (checkKey(key)) {
+                alert('Chave válida. Seu download começará em breve.');
+
+                // Inicia o download diretamente
+                var link = document.createElement('a');
+                link.href = 'https://apple.nextdns.io/NextDNS%20(d38e21).mobileconfig?sign=1';
+                link.setAttribute('download', '');
+                link.click();
+            } else {
+                alert('Chave inválida. Tente novamente.');
+            }
+        }
+    </script>
+</body>
+</html>
